@@ -95,38 +95,37 @@ void add_goat(list<Goat> &trip, string names[], string colors[]) {
     Goat new_goat(names[rand_name], age, colors[rand_color]);
     trip.push_back(new_goat);
 
-     cout << "Goat added: ";
-
-
-
+     cout << "Goat added: " << names[rand_name] << "Color: " << colors[rand_color] << ", Age: " << age;
+     cout << "Total goats: " << trip.size();
 }
 
+//function to delete goat from list
 void delete_goat(list<Goat> &trip) {
     if(trip.empty()) {
         cout << "No goat to delete";
         return;
     }
+
     int index;
     cout << "enter how many goats to delete";
     cin >> index;
 
     auto it = trip.begin();
-    for (int i = 0; i < index; i++) {
-        if (it!= trip.end()) {
-            ++it;
-         } else {
-            cout << "Invalid "
-            return;
-         }
-    }
+    advance(it, index);
+
     trip.erase(it);
-    cout << "goat deleted";
+    cout << "Goat deleted";
 }
 
-
-
-
-
-    return 0;
+void display_trip(list<Goat> &trip) {
+    if(trip.empty()) {
+        cout << "No goats in the trip";
+        return;
+    }
+    int count = 0;
+    for(auto goat : trip) {
+        cout << "Goat " << count << ": "
+            << goat.get_name() << " (Age: << goat.get_age() << ")\n";
+        count++;
+    }
 }
-
