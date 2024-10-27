@@ -36,27 +36,45 @@ int main() {
     //menu loop
     do {
         choice = main_menu();
-        if (choice == 4) {
-            cout << "Exiting program";
-        } else {
-            cout << "Selected option: " << endl;
-        }
+        switch (choice) {
+            case 1:
+                add_goat(trip,names,colors);
+                break;        
+            case 2:
+                delete_goat(trip);
+                break;
+            case 3:
+                display_trip(trip);
+                break;
+            case 4:
+                cout << "Exit program"
+                break;
+        }  
+    } while (choice !=4);
+
         return 0;
     }
 
-int main() {
+//menu function
+int main_menu() {
     cout << " Goat Manager 3001";
     cout << "Add a goat";
+    cout << "Delete a goat";
     cout << "List goat";
     cout << "Quit";
     cin >> choice;
 
+    if (choice > 1 && choice < 4) {
+        cout << "Invalid. Enter a number from 1-4";
+    }
+    
+    if (input_invalid) {
+        cout << "Error: Invalid input";
+    }
+
     return choice;
 
 }
-
-
-
 
 
     return 0;
