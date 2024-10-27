@@ -33,7 +33,28 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    
+    //menu loop
+    do {
+        choice = main_menu();
+        if (choice == 4) {
+            cout << "Exiting program";
+        } else {
+            cout << "Selected option: " << endl;
+        }
+        return 0;
+    }
+
+int main() {
+    cout << " Goat Manager 3001";
+    cout << "Add a goat";
+    cout << "List goat";
+    cout << "Quit";
+    cin >> choice;
+
+    return choice;
+
+}
+
 
 
 
