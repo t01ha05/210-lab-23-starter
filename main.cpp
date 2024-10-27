@@ -16,24 +16,27 @@ int main_menu();
 int main() {
     srand(time(0));
     list<Goat> trip; //list to store goat objects
-    int choice; 
-
-    bool again;
-
+    string names[SZ_NAMES] = ["Ella", "Inga"];
+    string colors[SZ_COLORS] = {"Red", "Blue"};
+    
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
     string names[SZ_NAMES];
     int i = 0;
-    while (fin >> names[i++]);
+    while (fin >> names[i++] && i < SZ_NAMES) {
+        i++;
+    }
     fin.close();
     
     ifstream fin1("colors.txt");
-    string colors[SZ_COLORS];
     i = 0;
-    while (fin1 >> colors[i++]);
+    while (fin1 >> colors[i] && i < SZ_COLORS) { //added boundary check
+        i++;
+    } 
     fin1.close();
 
     //menu loop
+    int choice;
     do {
         choice = main_menu();
         switch (choice) {
@@ -55,19 +58,47 @@ int main() {
      return 0;
 }
 
-void add_goat(list<Goat> trip, string names[], string colors[]) {
+//menu function
+int main_menu() {
+    int choice;
+    bool valid = false;
+    
+while(!valid) {
+    cout << " Goat Manager 3001";
+    cout << "Add a goat";
+    cout << "Delete a goat";
+    cout << "List goat";
+    cout << "Quit";
+    cout << "Choice -->"
+    cin >> choice;
+
+    if (cin.fail() || choice < 1 || choice > 4) {
+        cin.clear();
+        cin.ignore(1000); //ignore invalid input
+        cout << "Invalid input. Enter from 1-4";
+    } else {
+        valid = true;
+    }
+}
+   return choice;
+}
+
+
+
+
+void add_goat(list<Goat> &trip, string names[], string colors[]) {
     int rand_name = rand() % SZ_NAMES;
     int rand_color = rand() % SZ_COLORS;
     int age = rand() % MAX_AGE + 1;
 
     //create new goat objecty
     Goat new_goat(names[rand_name], age, colors[rand_color]);
+    trip.push_back(new_goat);
 
-    for(auto it = trip.begin(); it != trip.end(); it++) {
-        trip.push_back(new_goat);
-    }
+     cout << "Goat added: ";
 
-    cout << "Adding goat";
+
+
 }
 
 void delete_goat(list<Goat> &trip) {
@@ -94,28 +125,6 @@ void delete_goat(list<Goat> &trip) {
 
 
 
-
-
-//menu function
-int main_menu() {
-    cout << " Goat Manager 3001";
-    cout << "Add a goat";
-    cout << "Delete a goat";
-    cout << "List goat";
-    cout << "Quit";
-    cin >> choice;
-
-    if (choice > 1 && choice < 4) {
-        cout << "Invalid. Enter a number from 1-4";
-    }
-    
-    if (input_invalid) {
-        cout << "Error: Invalid input";
-    }
-
-    return choice;
-
-}
 
 
     return 0;
