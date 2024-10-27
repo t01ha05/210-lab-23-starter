@@ -10,9 +10,9 @@ private:
     string name;
     int age;
     string color;
-    
+
 public: 
-    Goat()                          { name = ""; age = 0; color = ""; }
+    Goat() : name(""), age(0), color("") {}
     //constructor with only name
     Goat(string n) : name(n), age (0), color(""){}
 
@@ -35,7 +35,7 @@ public:
         return age < other.age;
     }
     void display() const {
-        cout << name << " (" << age << ", " << color >> ")\n";
+        cout << name << " (" << age << ", " << color << ")\n";
     }
 };
 

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
-#include <cstdlib>
+#include <cstdlib>3
 #include <ctime>
 #include "Goat.h"
 using namespace std;
@@ -10,24 +10,24 @@ using namespace std;
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
 //reorganize for readability
-void add_goat(list<Goat> &trip, string names[], string colors[]);
+void add_goat(list<Goat> &trip, string names[], string colors[], int name_count, int color_count);
 void delete_goat(list<Goat> &trip);
 void display_trip(list<Goat> &trip);
 int main_menu();
 
 int main() {
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(0)));
     list<Goat> trip; //list to store goat objects
     string names[SZ_NAMES];
     string colors[SZ_COLORS];
+    int name_count = 0, color_count = 0;
     
-    // read & populate arrays for names and colors
     ifstream fin("names.txt");
     if (!fin) {
         cout << "Error" << endl;
         return 1;
     }
-    while (name_count < SZ_NAMES && fin >> name[name_count]) {
+    while (name_count < SZ_NAMES && fin >> names[name_count]) {
         name_count++;
     }
     fin.close();
@@ -35,7 +35,7 @@ int main() {
    ifstream fin1("colors.txt");
     if (!fin1) {
         cout << "Error" << endl;
-        return1;
+        return 1;
     }
     while (color_count < SZ_NAMES && fin1 >> colors[color_count]) {
         color_count++;
@@ -47,8 +47,6 @@ int main() {
         cout << "Error" << endl;
         return 1;
     }
-    
- 
     //menu loop
     int choice;
     do {
@@ -82,9 +80,9 @@ int main_menu() {
 while(!valid) {
     cout << "\n*** Goat Manager 3001 ***\n";
     cout << "[1] Add a goat\n";
-    cout << "[2]Delete a goat\n";
-    cout << "[3]List goats\n";
-    cout << "[4]Quit\n";
+    cout << "[2] Delete a goat\n";
+    cout << "[3] List goats\n";
+    cout << "[4] Quit\n";
     cout << "Choice --> ";
     cin >> choice;
 
@@ -152,7 +150,7 @@ void display_trip(list<Goat> &trip) {
     int count = 1;
     for(const auto &goat : trip) {
         cout << "[" << count << "] " << goat.get_name() 
-             << " (" << goat.get_age
+             << " (" << goat.get_age() << ", " << goat.get_color() << ")\n";
         count++;
     }
     cout << "Total number of goats: " << count << "\n";
