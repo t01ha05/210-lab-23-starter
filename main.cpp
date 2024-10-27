@@ -7,9 +7,9 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
+//reorganize for readability
+void add_goat(list<Goat> &trip, string names[], string colors[]);
 void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 int main_menu();
 
@@ -47,7 +47,7 @@ int main() {
                 display_trip(trip);
                 break;
             case 4:
-                cout << "Exit program"
+                cout << "Exit program";
                 break;
         }  
     } while (choice !=4);
@@ -63,15 +63,36 @@ void add_goat(list<Goat> trip, string names[], string colors[]) {
     //create new goat objecty
     Goat new_goat(names[rand_name], age, colors[rand_color]);
 
-    for(auto )
-
+    for(auto it = trip.begin(); it != trip.end(); it++) {
+        trip.push_back(new_goat);
+    }
 
     cout << "Adding goat";
 }
 
 void delete_goat(list<Goat> &trip) {
-    cout << "Deleting goat";
+    if(trip.empty()) {
+        cout << "No goat to delete";
+        return;
+    }
+    int index;
+    cout << "enter how many goats to delete";
+    cin >> index;
+
+    auto it = trip.begin();
+    for (int i = 0; i < index; i++) {
+        if (it!= trip.end()) {
+            ++it;
+         } else {
+            cout << "Invalid "
+            return;
+         }
+    }
+    trip.erase(it);
+    cout << "goat deleted";
 }
+
+
 
 
 
