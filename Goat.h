@@ -10,6 +10,7 @@ private:
     string name;
     int age;
     string color;
+    
 public: 
     Goat()                          { name = ""; age = 0; color = ""; }
     //constructor with only name
@@ -30,7 +31,12 @@ public:
     void set_color(string c)        { color = c; }
     string get_color() const        { return color; }
 
-    // write overloaded < operator for the std::list
+    bool operator<(const Goat &other) const {
+        return age < other.age;
+    }
+    void display() const {
+        cout << name << " (" << age << ", " << color >> ")\n";
+    }
 };
 
 #endif
