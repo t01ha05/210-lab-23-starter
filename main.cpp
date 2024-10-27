@@ -15,6 +15,9 @@ int main_menu();
 
 int main() {
     srand(time(0));
+    list<Goat> trip; //list to store goat objects
+    int choice; 
+
     bool again;
 
     // read & populate arrays for names and colors
@@ -23,11 +26,14 @@ int main() {
     int i = 0;
     while (fin >> names[i++]);
     fin.close();
+    
     ifstream fin1("colors.txt");
     string colors[SZ_COLORS];
     i = 0;
     while (fin1 >> colors[i++]);
     fin1.close();
+
+    
 
 
 
