@@ -52,8 +52,28 @@ int main() {
         }  
     } while (choice !=4);
 
-        return 0;
-    }
+     return 0;
+}
+
+void add_goat(list<Goat> trip, string names[], string colors[]) {
+    int rand_name = rand() % SZ_NAMES;
+    int rand_color = rand() % SZ_COLORS;
+    int age = rand() % MAX_AGE + 1;
+
+    //create new goat objecty
+    Goat new_goat(names[rand_name], age, colors[rand_color]);
+
+    for(auto )
+
+
+    cout << "Adding goat";
+}
+
+void delete_goat(list<Goat> &trip) {
+    cout << "Deleting goat";
+}
+
+
 
 //menu function
 int main_menu() {
