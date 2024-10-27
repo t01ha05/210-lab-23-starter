@@ -55,7 +55,7 @@ int main() {
         choice = main_menu();
         switch (choice) {
             case 1:
-                add_goat(trip,names,colors, name_count, color_count);
+                add_goat(trip, names, colors, name_count, color_count);
                 break;        
             case 2:
                 delete_goat(trip);
@@ -90,8 +90,8 @@ while(!valid) {
 
     if (cin.fail() || choice < 1 || choice > 4) {
         cin.clear();
-        cin.ignore(1000); //ignore invalid input
-        cout << "Invalid input. Enter from 1-4";
+        cin.ignore(1000, '\n'); //ignore invalid input
+        cout << "Invalid input. Enter # from 1-4.\n";
     } else {
         valid = true;
     }
@@ -99,17 +99,17 @@ while(!valid) {
    return choice;
 }
 
-void add_goat(list<Goat> &trip, string names[], string colors[]) {
-    int rand_name = rand() % SZ_NAMES;
-    int rand_color = rand() % SZ_COLORS;
+void add_goat(list<Goat> &trip, string names[], string colors[], int name_count, int color_count) {
+    int rand_name = rand() % name_count;
+    int rand_color = rand() % color_count;
     int age = rand() % (MAX_AGE + 1);
 
     //create new goat objecty
     Goat new_goat(names[rand_name], age, colors[rand_color]);
     trip.push_back(new_goat);
 
-     cout << "Goat added: " << names[rand_name] << "Color: " << colors[rand_color] << ", Age: " << age;
-     cout << "Total goats: " << trip.size() << "\n";
+     cout << "\nGoat added: " << names[rand_name] << "Color: " << colors[rand_color] << ", Age: " << age;
+     cout << "\nTotal goats: " << trip.size() << "\n";
 }
 
 //function to delete goat from list
@@ -118,14 +118,28 @@ void delete_goat(list<Goat> &trip) {
         cout << "No goat to delete.\n";
         return;
     }
-
+    //display the goats
+    int count = 1;
+    for (const auto &goat : trip) {
+        cout << "[" << count << "] " << goat.get_name() 
+            << "( " << goat.get_age() << ", " << goat.get_color() << ")\n";
+        count++;
+    }
+    
     int index;
-    cout << "enter how many goats to delete";
+    cout << "Enter how many goats to delete";
     cin >> index;
 
-    auto it = trip.begin();
-    advance(it, index);
+    //validate input (copied code from above)
+    if (cin.fail() || index < 1 || index >= count) {
+        cin.clear();
+        cin.ignore(1000, '\n'); 
+        cout << "Invalid input.\n";
+        return;
+    }
 
+    auto it = trip.begin();
+    advance(it, index - 1);
     trip.erase(it);
     cout << "Goat deleted";
 }
@@ -135,11 +149,10 @@ void display_trip(list<Goat> &trip) {
         cout << "No goats in the trip";
         return;
     }
-    int count = 0;
+    int count = 1;
     for(const auto &goat : trip) {
-        cout << "Goat " << count << ": "
-            << goat.get_name() << " (Color: " << goat.get_color()
-            << ", Age: " << goat.get_age() << ")\n";
+        cout << "[" << count << "] " << goat.get_name() 
+             << " (" << goat.get_age
         count++;
     }
     cout << "Total number of goats: " << count << "\n";
