@@ -1,8 +1,17 @@
+/* 
+ * Title: Goat Manager 3001 
+ * Description: This program manages a collection of goats, allowing users to add, delete, 
+ *              and list goats. It randomly assigns names, colors, and ages to the goats 
+ *              based on data loaded from files.
+ * Author: Talha Ahmed 
+ * Lab: 23
+ * Class: COMSC-210 
+ */
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <list>
-#include <cstdlib>3
+#include <cstdlib>
 #include <ctime>
 #include "Goat.h"
 using namespace std;
