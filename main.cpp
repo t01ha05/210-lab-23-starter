@@ -10,18 +10,17 @@ const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 //reorganize for readability
 void add_goat(list<Goat> &trip, string names[], string colors[]);
 void delete_goat(list<Goat> &trip);
-void display_trip(list<Goat> trip);
+void display_trip(list<Goat> &trip);
 int main_menu();
 
 int main() {
     srand(time(0));
     list<Goat> trip; //list to store goat objects
-    string names[SZ_NAMES] = ["Ella", "Inga"];
-    string colors[SZ_COLORS] = {"Red", "Blue"};
+    string names[SZ_NAMES];
+    string colors[SZ_COLORS];
     
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
-    string names[SZ_NAMES];
     int i = 0;
     while (fin >> names[i++] && i < SZ_NAMES) {
         i++;
@@ -64,12 +63,12 @@ int main_menu() {
     bool valid = false;
     
 while(!valid) {
-    cout << " Goat Manager 3001";
-    cout << "Add a goat";
-    cout << "Delete a goat";
-    cout << "List goat";
-    cout << "Quit";
-    cout << "Choice -->"
+    cout << "\n*** Goat Manager 3001 ***\n";
+    cout << "[1] Add a goat\n";
+    cout << "[2]Delete a goat\n";
+    cout << "[3]List goats\n";
+    cout << "[4]Quit\n";
+    cout << "Choice --> ";
     cin >> choice;
 
     if (cin.fail() || choice < 1 || choice > 4) {
@@ -123,9 +122,11 @@ void display_trip(list<Goat> &trip) {
         return;
     }
     int count = 0;
-    for(auto goat : trip) {
+    for(const auto &goat : trip) {
         cout << "Goat " << count << ": "
-            << goat.get_name() << " (Age: << goat.get_age() << ")\n";
+            << goat.get_name() << " (Color: " << goat.get_color()
+            << ", Age: " << goat.get_age() << ")\n";
         count++;
     }
+    cout << "Total number of goats: " << count << "\n";
 }
